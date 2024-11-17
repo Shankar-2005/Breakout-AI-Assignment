@@ -37,11 +37,6 @@ The **AI Agent Dashboard** automates information retrieval for entities listed i
    - Enable the Google Sheets API in the Google Cloud Console.
    - Obtain a `credentials.json` file and place it in the project root directory.
 
-#### Installing Dependencies
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/Breakout-AI-Assignment.git
-   cd Breakout-AI-Assignment
 
 #### Running the Application
 1. **Start Streamlit**:
