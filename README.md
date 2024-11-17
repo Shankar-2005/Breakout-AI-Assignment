@@ -3,80 +3,45 @@
 
 ### Project Overview
 
-The **AI Agent Dashboard** is designed to automate information retrieval for entities listed in a dataset. This application allows users to upload a CSV file or connect to a Google Sheet, specify custom prompts, and utilize web search and LLM capabilities to extract structured information for each entity. The project integrates APIs, including OpenAI and SerpAPI, and provides options for outputting results in a downloadable format or updating a Google Sheet.
+The **AI Agent Dashboard** automates information retrieval for entities listed in a dataset. This application allows users to upload a CSV file or connect to a Google Sheet, specify custom prompts, and utilize web search and LLM capabilities to extract structured information for each entity. The project integrates the Groq API for LLM processing and SerpAPI for web search, with options to download results or update a Google Sheet.
 
-### Key Features and Expected Outcomes
+---
 
-This project fulfills the following functionalities:
+### Key Features
 
-#### 1. File Upload and Google Sheets Connection  
-   - **Goal**: Allow users to upload a CSV file or connect to a Google Sheet.
-   - **Outcome**: 
-     - Users can upload a CSV or connect Google Sheets by entering credentials.
-     - Display columns for selection, including a data preview.
-   - **Technical Details**: Integrated with Google Sheets API for real-time access, allowing users to authenticate and pull data directly.
-
-#### 2. Dynamic Query Input with Prompt Template  
-   - **Goal**: Enable custom prompts with placeholders for entity-based searches.
-   - **Outcome**: 
-     - A prompt input box where users can define queries such as “Get email of {company}.”
-     - Clear preview of generated queries based on the template.
-  
-#### 3. Automated Web Search for Information Retrieval  
-   - **Goal**: Perform web searches using the custom prompt to gather relevant data.
-   - **Outcome**:
-     - For each entity in the selected column, the agent conducts a web search.
-     - API integration with SerpAPI to handle searches with rate-limiting and response management.
-   - **Technical Details**: Includes error handling for rate limits and quota errors.
-   
-#### 4. LLM Integration for Parsing and Extraction  
-   - **Goal**: Use OpenAI's API to extract specific information based on search results.
-   - **Outcome**:
-     - Sends search results to OpenAI’s API with an entity-specific prompt to extract the needed information.
-   - **Technical Details**: Handles `RateLimitError` by retrying with delays, up to three times.
-
-#### 5. Display and Export Results  
-   - **Goal**: Provide extracted information in a user-friendly table with download options.
-   - **Outcome**:
-     - Display results within the app, organized by entity and extracted data.
-     - Downloadable as CSV or optional update to Google Sheets.
-   - **Technical Details**: Option for “Download CSV” and Google Sheets update.
-
-#### 6. Advanced Features  
-   - **Error Handling**: Integrated retries and user notifications for failed queries.
-   - **Batch Processing**: For large datasets, limits the number of entities processed to avoid rate limits and API quota issues.
-   - **API Key Instructions**: Clear guidance on entering API keys securely in the app sidebar.
+- **File Upload or Google Sheets Connection**: Choose between uploading a CSV file or using a Google Sheet as the data source.
+- **Custom Query Prompt**: Specify custom prompts to search for information relevant to each entity.
+- **Automated Web Search**: Uses SerpAPI to gather search results for each entity.
+- **LLM-based Information Extraction**: Groq’s API processes the search results and extracts structured information.
+- **Results Download**: Download the extracted data as a CSV file or update a Google Sheet.
 
 ---
 
 ### Technology Stack
-- **Dashboard/UI**: Streamlit
+- **UI Framework**: Streamlit
 - **Data Handling**: Pandas for CSV files; Google Sheets API for Google Sheets integration
-- **Search API**: SerpAPI (or ScraperAPI)
-- **LLM API**: OpenAI’s GPT API
+- **Search API**: SerpAPI
+- **LLM API**: Groq API
 - **Backend**: Python
-- **Agent Framework**: LangChain (optional, for more advanced agent management)
 
 ---
 
 ### Setup Instructions
 
 #### Prerequisites
-1. **Python 3.7 or higher** is recommended.
-2. **Install Dependencies**:
-   - Clone the repository and navigate to the project folder.
-   - Run:
-     ```bash
-     pip install -r requirements.txt
-     ```
+1. **Python 3.7 or higher**
+2. **API Access**: Ensure you have the necessary API keys for Groq and SerpAPI:
+   - **Groq API Key**: Sign up at [Groq's API Platform](https://groq.com) and get an API key.
+   - **SerpAPI Key**: Sign up at [SerpAPI](https://serpapi.com/) and obtain your API key.
+3. **Google Sheets API** (Optional for Google Sheets integration):
+   - Enable the Google Sheets API in the Google Cloud Console.
+   - Obtain a `credentials.json` file and place it in the project root directory.
 
-3. **API Keys and Environment Variables**:
-   - Ensure you have the following API keys:
-     - **OpenAI API Key**: [Sign up and get the key here](https://platform.openai.com/signup).
-     - **SerpAPI Key**: [Sign up and get the key here](https://serpapi.com/).
-   - **Google Sheets Credentials**:
-     - Save your `credentials.json` file from Google Cloud Console in the root directory.
-     - Enable the Google Sheets API and share the sheet with the service account email provided in the credentials.
+#### Installing Dependencies
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/Breakout-AI-Assignment.git
+   cd Breakout-AI-Assignment
 
 #### Running the Application
 1. **Start Streamlit**:
