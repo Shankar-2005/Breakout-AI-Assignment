@@ -12,7 +12,7 @@ st.title("AI Agent Dashboard")
 # Sidebar for API keys
 st.sidebar.title("Configuration")
 serpapi_key = st.sidebar.text_input("SerpAPI Key", type="password")
-openai_key = st.sidebar.text_input("OpenAI API Key", type="password")
+groq_key = st.sidebar.text_input("Groq API Key", type="password")  # Using Groq API key instead of OpenAI
 
 # Choose Data Input Source
 st.subheader("Data Input")
@@ -45,13 +45,13 @@ if 'data' in locals() and st.button("Process Data"):
     results = []
     for i, entity in enumerate(data[entity_column]):
         if i > 0:
-            time.sleep(1) 
+            time.sleep(1)  # Delay to reduce rate of requests
 
         # Perform web search and information extraction
         search_results = search_entity(entity, prompt_template, serpapi_key)
         if search_results:
             extraction_prompt = f"Extract the following information for {entity}: {prompt_template}"
-            extracted_info = extract_info_with_llm(search_results, extraction_prompt, openai_key)
+            extracted_info = extract_info_with_llm(search_results, extraction_prompt, groq_key)
             results.append({"Entity": entity, "Extracted Info": extracted_info})
         else:
             st.error(f"Failed to retrieve data for {entity}")
@@ -63,7 +63,7 @@ if 'data' in locals() and st.button("Process Data"):
     csv = result_df.to_csv(index=False)
     st.download_button("Download CSV", csv, "extracted_data.csv", "text/csv")
 
-    # Update Google Sheet
+    # Optional: Update Google Sheet
     if data_source == "Google Sheets" and st.checkbox("Update Google Sheet with Results"):
         update_google_sheet(service, sheet_id, range_name, result_df)
         st.success("Google Sheet successfully updated with extracted data!")
