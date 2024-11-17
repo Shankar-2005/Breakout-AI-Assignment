@@ -37,7 +37,7 @@ elif data_source == "Google Sheets":
 # Prompt and Column Selection
 if 'data' in locals():
     entity_column = st.selectbox("Select the column for entities", data.columns)
-    prompt_template = st.text_input("Enter custom prompt", "Find email address of {entity}")
+    prompt_template = st.text_input("Enter custom prompt", "Enter your prompt")
     st.write(f"Example Prompt: `{prompt_template.format(entity=data[entity_column].iloc[0])}`")
 
 # Process Data Button
