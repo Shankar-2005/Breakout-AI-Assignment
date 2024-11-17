@@ -12,7 +12,7 @@ st.title("AI Agent Dashboard")
 # Sidebar for API keys
 st.sidebar.title("Configuration")
 serpapi_key = st.sidebar.text_input("SerpAPI Key", type="password")
-groq_key = st.sidebar.text_input("Groq API Key", type="password")  # Using Groq API key instead of OpenAI
+groq_key = st.sidebar.text_input("Groq API Key", type="password") 
 
 # Choose Data Input Source
 st.subheader("Data Input")
@@ -45,7 +45,7 @@ if 'data' in locals() and st.button("Process Data"):
     results = []
     for i, entity in enumerate(data[entity_column]):
         if i > 0:
-            time.sleep(1)  # Delay to reduce rate of requests
+            time.sleep(1) 
 
         # Perform web search and information extraction
         search_results = search_entity(entity, prompt_template, serpapi_key)
@@ -63,7 +63,7 @@ if 'data' in locals() and st.button("Process Data"):
     csv = result_df.to_csv(index=False)
     st.download_button("Download CSV", csv, "extracted_data.csv", "text/csv")
 
-    # Optional: Update Google Sheet
+    # Update Google Sheet
     if data_source == "Google Sheets" and st.checkbox("Update Google Sheet with Results"):
         update_google_sheet(service, sheet_id, range_name, result_df)
         st.success("Google Sheet successfully updated with extracted data!")
